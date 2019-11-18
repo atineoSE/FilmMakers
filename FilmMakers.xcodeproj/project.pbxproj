@@ -13,16 +13,18 @@
 		0BAC0041237D9B0E00B74D80 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0BAC0040237D9B0E00B74D80 /* Assets.xcassets */; };
 		0BAC0044237D9B0E00B74D80 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0BAC0042237D9B0E00B74D80 /* LaunchScreen.storyboard */; };
 		0BAC0061237EAFE400B74D80 /* SimplePhotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BAC005D237EAFE300B74D80 /* SimplePhotoCollectionViewCell.xib */; };
-		0BAC0062237EAFE400B74D80 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BAC005E237EAFE400B74D80 /* ProfileViewController.xib */; };
 		0BAC0063237EAFE400B74D80 /* PhotoCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BAC005F237EAFE400B74D80 /* PhotoCollectionViewController.xib */; };
-		0BAC0073237EB00000B74D80 /* PhotoCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC0066237EB00000B74D80 /* PhotoCollectionDataSource.swift */; };
-		0BAC0074237EB00000B74D80 /* PhotoCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC0067237EB00000B74D80 /* PhotoCollectionViewController.swift */; };
 		0BAC0077237EB00000B74D80 /* SimplePhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC006A237EB00000B74D80 /* SimplePhotoCollectionViewCell.swift */; };
-		0BAC0079237EB00000B74D80 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC006D237EB00000B74D80 /* UIImage.swift */; };
 		0BAC007A237EB00000B74D80 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC006E237EB00000B74D80 /* UIView.swift */; };
 		0BAC007C237EB00000B74D80 /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC0071237EB00000B74D80 /* PhotoViewController.swift */; };
-		0BAC00822383141200B74D80 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC00812383141200B74D80 /* ProfileViewController.swift */; };
 		0BAC0084238315CA00B74D80 /* PhotoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BAC0083238315CA00B74D80 /* PhotoViewController.xib */; };
+		0BAC00862383203A00B74D80 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BAC00852383203900B74D80 /* ProfileViewController.xib */; };
+		0BAC00882383205000B74D80 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC00872383205000B74D80 /* UIImage.swift */; };
+		0BAC008A2383206100B74D80 /* PhotoCollectionViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC00892383206100B74D80 /* PhotoCollectionViewControllerDelegate.swift */; };
+		0BAC008C2383206B00B74D80 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC008B2383206B00B74D80 /* ProfileViewController.swift */; };
+		0BAC008E2383208C00B74D80 /* PhotoCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC008D2383208C00B74D80 /* PhotoCollectionDataSource.swift */; };
+		0BAC00902383210700B74D80 /* PhotoCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC008F2383210700B74D80 /* PhotoCollectionViewController.swift */; };
+		0BAC00922383215B00B74D80 /* UICubicTimingParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC00912383215B00B74D80 /* UICubicTimingParameters.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,16 +36,18 @@
 		0BAC0043237D9B0E00B74D80 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0BAC0045237D9B0E00B74D80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0BAC005D237EAFE300B74D80 /* SimplePhotoCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SimplePhotoCollectionViewCell.xib; sourceTree = "<group>"; };
-		0BAC005E237EAFE400B74D80 /* ProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
 		0BAC005F237EAFE400B74D80 /* PhotoCollectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoCollectionViewController.xib; sourceTree = "<group>"; };
-		0BAC0066237EB00000B74D80 /* PhotoCollectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCollectionDataSource.swift; sourceTree = "<group>"; };
-		0BAC0067237EB00000B74D80 /* PhotoCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewController.swift; sourceTree = "<group>"; };
 		0BAC006A237EB00000B74D80 /* SimplePhotoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimplePhotoCollectionViewCell.swift; sourceTree = "<group>"; };
-		0BAC006D237EB00000B74D80 /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		0BAC006E237EB00000B74D80 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		0BAC0071237EB00000B74D80 /* PhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
-		0BAC00812383141200B74D80 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		0BAC0083238315CA00B74D80 /* PhotoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoViewController.xib; sourceTree = "<group>"; };
+		0BAC00852383203900B74D80 /* ProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
+		0BAC00872383205000B74D80 /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		0BAC00892383206100B74D80 /* PhotoCollectionViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewControllerDelegate.swift; sourceTree = "<group>"; };
+		0BAC008B2383206B00B74D80 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		0BAC008D2383208C00B74D80 /* PhotoCollectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCollectionDataSource.swift; sourceTree = "<group>"; };
+		0BAC008F2383210700B74D80 /* PhotoCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewController.swift; sourceTree = "<group>"; };
+		0BAC00912383215B00B74D80 /* UICubicTimingParameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICubicTimingParameters.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,7 +98,7 @@
 				0BAC0042237D9B0E00B74D80 /* LaunchScreen.storyboard */,
 				0BAC003D237D9B0C00B74D80 /* Main.storyboard */,
 				0BAC0083238315CA00B74D80 /* PhotoViewController.xib */,
-				0BAC005E237EAFE400B74D80 /* ProfileViewController.xib */,
+				0BAC00852383203900B74D80 /* ProfileViewController.xib */,
 				0BAC005F237EAFE400B74D80 /* PhotoCollectionViewController.xib */,
 				0BAC005D237EAFE300B74D80 /* SimplePhotoCollectionViewCell.xib */,
 			);
@@ -104,9 +108,10 @@
 		0BAC0064237EB00000B74D80 /* PhotoCollection */ = {
 			isa = PBXGroup;
 			children = (
-				0BAC00812383141200B74D80 /* ProfileViewController.swift */,
-				0BAC0066237EB00000B74D80 /* PhotoCollectionDataSource.swift */,
-				0BAC0067237EB00000B74D80 /* PhotoCollectionViewController.swift */,
+				0BAC008D2383208C00B74D80 /* PhotoCollectionDataSource.swift */,
+				0BAC008B2383206B00B74D80 /* ProfileViewController.swift */,
+				0BAC008F2383210700B74D80 /* PhotoCollectionViewController.swift */,
+				0BAC00892383206100B74D80 /* PhotoCollectionViewControllerDelegate.swift */,
 				0BAC006A237EB00000B74D80 /* SimplePhotoCollectionViewCell.swift */,
 			);
 			path = PhotoCollection;
@@ -115,7 +120,8 @@
 		0BAC006B237EB00000B74D80 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				0BAC006D237EB00000B74D80 /* UIImage.swift */,
+				0BAC00912383215B00B74D80 /* UICubicTimingParameters.swift */,
+				0BAC00872383205000B74D80 /* UIImage.swift */,
 				0BAC006E237EB00000B74D80 /* UIView.swift */,
 			);
 			path = Extensions;
@@ -187,7 +193,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0BAC0062237EAFE400B74D80 /* ProfileViewController.xib in Resources */,
+				0BAC00862383203A00B74D80 /* ProfileViewController.xib in Resources */,
 				0BAC0044237D9B0E00B74D80 /* LaunchScreen.storyboard in Resources */,
 				0BAC0084238315CA00B74D80 /* PhotoViewController.xib in Resources */,
 				0BAC0041237D9B0E00B74D80 /* Assets.xcassets in Resources */,
@@ -204,14 +210,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0BAC0074237EB00000B74D80 /* PhotoCollectionViewController.swift in Sources */,
-				0BAC0079237EB00000B74D80 /* UIImage.swift in Sources */,
 				0BAC007A237EB00000B74D80 /* UIView.swift in Sources */,
+				0BAC00922383215B00B74D80 /* UICubicTimingParameters.swift in Sources */,
+				0BAC008C2383206B00B74D80 /* ProfileViewController.swift in Sources */,
+				0BAC008A2383206100B74D80 /* PhotoCollectionViewControllerDelegate.swift in Sources */,
 				0BAC0077237EB00000B74D80 /* SimplePhotoCollectionViewCell.swift in Sources */,
+				0BAC008E2383208C00B74D80 /* PhotoCollectionDataSource.swift in Sources */,
+				0BAC00902383210700B74D80 /* PhotoCollectionViewController.swift in Sources */,
 				0BAC0038237D9B0C00B74D80 /* AppDelegate.swift in Sources */,
 				0BAC003A237D9B0C00B74D80 /* SceneDelegate.swift in Sources */,
-				0BAC00822383141200B74D80 /* ProfileViewController.swift in Sources */,
-				0BAC0073237EB00000B74D80 /* PhotoCollectionDataSource.swift in Sources */,
+				0BAC00882383205000B74D80 /* UIImage.swift in Sources */,
 				0BAC007C237EB00000B74D80 /* PhotoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

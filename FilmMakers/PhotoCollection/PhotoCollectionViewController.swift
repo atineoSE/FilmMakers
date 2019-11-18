@@ -9,15 +9,43 @@ class PhotoCollectionViewController: UIViewController {
     private var focusItem: IndexPath?
     private var selectedPhoto: UIImage?
     
-    var containerSize: CGSize? {
+    var delegate: PhotoCollectionViewControllerDelegate?
+    var collapsedSize: CGSize? {
         didSet {
-            guard let containerSize = containerSize else { return }
-            configureDataSource(with: containerSize)
+            guard let collapsedSize = collapsedSize else { return }
+            configureDataSource(for: photoCollectionLayout, with: collapsedSize)
+        }
+    }
+    
+    enum PhotoCollectionLayout {
+        case horizontal
+        case vertical
+    }
+    
+    var photoCollectionLayout: PhotoCollectionLayout = .horizontal {
+        didSet {
+            if photoCollectionLayout != oldValue {
+                configureDataSource(for: photoCollectionLayout, with: view.frame.size)
+                setCollectionViewLayout(for: photoCollectionLayout)
+                if let focusItem = focusItem {
+                    print("scroll to item at \(focusItem)")
+                    photoCollectionView.scrollToItem(at: focusItem, at: .centeredHorizontally, animated: true)
+                }
+            }
+            photoCollectionView.collectionViewLayout.invalidateLayout()
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        func setContainerViewStyle() {
+            view.clipsToBounds = true
+            view.layer.cornerRadius = 16.0
+            if #available(iOS 11, *) {
+                view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+            }
+        }
         
         dataSource = PhotoCollectionDataSource()
         photoCollectionView.dataSource = dataSource
@@ -27,24 +55,37 @@ class PhotoCollectionViewController: UIViewController {
         let nib = UINib(nibName: identifier, bundle: nil)
         photoCollectionView.register(nib, forCellWithReuseIdentifier: identifier)
         
+        setContainerViewStyle()
     }
     
-    private func configureDataSource(with size:CGSize) {
-        dataSource?.imageHeight = size.height
+    private func configureDataSource(for photoCollectionLayout: PhotoCollectionLayout, with size:CGSize) {
+        let imageReferenceSide: ImageReferenceSide
+        switch photoCollectionLayout {
+        case .horizontal:
+            let height = size.height - 1.0
+            imageReferenceSide = ImageReferenceSide.vertical(height: height)
+        case .vertical:
+            let width = size.width/2.0 - 1.0
+            imageReferenceSide = ImageReferenceSide.horizontal(width: width)
+        }
+        dataSource?.imageReferenceSide = imageReferenceSide
     }
 
-    private func setCollectionViewLayout() {
+    private func setCollectionViewLayout(for photoCollectionLayout: PhotoCollectionLayout) {
         let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = .horizontal
+        switch photoCollectionLayout {
+        case .horizontal:
+            flowLayout.scrollDirection = .horizontal
+            print("Set flow layout (horizontal)")
+        case .vertical:
+            flowLayout.scrollDirection = .vertical
+            print("Set flow layout (vertical)")
+        }
         photoCollectionView.setCollectionViewLayout(flowLayout, animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let destination = segue.destination as? PhotoViewController,
-            segue.identifier == PhotoCollectionViewController.ShowPhotoDetailsSegueIdentifier else
-        {
-            return
-        }
+        guard let destination = segue.destination as? PhotoViewController, segue.identifier == PhotoCollectionViewController.ShowPhotoDetailsSegueIdentifier  else { return }
         destination.photo = selectedPhoto
     }
     
@@ -58,7 +99,7 @@ extension PhotoCollectionViewController: UICollectionViewDelegate {
         print("didSelectItemAt \(indexPath)")
         focusItem = indexPath
         selectedPhoto = dataSource?.item(at: indexPath)
-        showPhotoDetails()
+        delegate?.didTapOnPhoto()
     }
 }
 
@@ -79,3 +120,4 @@ extension PhotoCollectionViewController: UICollectionViewDelegateFlowLayout  {
         return 0.0
     }
 }
+

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina5_5" orientation="portrait" appearance="light"/>
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -9,13 +9,22 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProfileViewController" customModule="FilmMakers" customModuleProvider="target">
             <connections>
+                <outlet property="collapseButton" destination="qHJ-yQ-d2n" id="ojL-rr-X0j"/>
                 <outlet property="containerView" destination="9PX-CJ-34N" id="M7y-NY-wbi"/>
+                <outlet property="containerViewTopConstraint" destination="TYA-1L-R3H" id="5JT-Lu-obH"/>
+                <outlet property="profileBackgroundImageView" destination="Wlq-4b-EFc" id="FfZ-EM-ikd"/>
+                <outlet property="profileNameLabel" destination="oRh-ff-ToL" id="tjU-jb-IDg"/>
+                <outlet property="profileNameTopConstraint" destination="UxN-nJ-bSz" id="zix-xU-UNi"/>
+                <outlet property="profileNameXAlignmentConstraint" destination="bQo-xD-GhX" id="wrS-JU-fzd"/>
+                <outlet property="profilePhotoHeightConstraint" destination="kGt-hw-2pg" id="cub-5F-yAa"/>
+                <outlet property="profilePhotoTopConstraint" destination="Hv9-Vk-cLP" id="lwW-z9-GMI"/>
+                <outlet property="profilePhotoXAlignmentConstraint" destination="8UL-Ne-qUC" id="8gS-CV-iuS"/>
                 <outlet property="view" destination="F4i-SU-hdE" id="r56-5a-HWv"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="F4i-SU-hdE">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tarantino" translatesAutoresizingMaskIntoConstraints="NO" id="Wlq-4b-EFc" userLabel="Profile Background Image View">
@@ -28,7 +37,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="432"/>
                     <subviews>
                         <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" image="tarantino" translatesAutoresizingMaskIntoConstraints="NO" id="epo-rq-eft" customClass="DesignableImageView" customModule="FilmMakers" customModuleProvider="target">
-                            <rect key="frame" x="173.66666666666666" y="64" width="67" height="67"/>
+                            <rect key="frame" x="173.5" y="64" width="67" height="67"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="67" id="kGt-hw-2pg" userLabel="Profile Photo Height Constraint"/>
                                 <constraint firstAttribute="width" secondItem="epo-rq-eft" secondAttribute="height" multiplier="1:1" id="r4Q-Z1-OQh"/>
@@ -46,13 +55,13 @@
                             </userDefinedRuntimeAttributes>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quentin Tarantino" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oRh-ff-ToL" userLabel="Profile Name Label">
-                            <rect key="frame" x="133.33333333333331" y="132" width="147.33333333333331" height="22"/>
+                            <rect key="frame" x="133.5" y="132" width="147" height="22"/>
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Director / actor - American" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SLO-pc-Rut">
-                            <rect key="frame" x="120.66666666666669" y="158" width="173" height="17"/>
+                            <rect key="frame" x="120.5" y="158" width="173" height="17"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
@@ -64,9 +73,21 @@
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                         </textView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qHJ-yQ-d2n" userLabel="Collapse Button">
+                            <rect key="frame" x="362" y="48" width="44" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="44" id="JOc-q1-kaz"/>
+                                <constraint firstAttribute="height" constant="44" id="zy4-p0-NKR"/>
+                            </constraints>
+                            <state key="normal" image="Arrow"/>
+                            <connections>
+                                <action selector="didTapCollapseButton:" destination="-1" eventType="touchUpInside" id="r9R-QF-afj"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.60274537849999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstItem="qHJ-yQ-d2n" firstAttribute="top" secondItem="dpr-QS-oNx" secondAttribute="top" constant="48" id="0TQ-Gv-Brm"/>
                         <constraint firstItem="epo-rq-eft" firstAttribute="centerX" secondItem="dpr-QS-oNx" secondAttribute="centerX" id="8UL-Ne-qUC" userLabel="Profile PhotoX Alignment Constraint"/>
                         <constraint firstItem="SLO-pc-Rut" firstAttribute="centerX" secondItem="dpr-QS-oNx" secondAttribute="centerX" id="9O9-LK-eha"/>
                         <constraint firstItem="SLO-pc-Rut" firstAttribute="top" secondItem="dpr-QS-oNx" secondAttribute="top" constant="158" id="H7e-0y-fNw"/>
@@ -76,11 +97,12 @@
                         <constraint firstItem="oRh-ff-ToL" firstAttribute="centerX" secondItem="dpr-QS-oNx" secondAttribute="centerX" id="bQo-xD-GhX" userLabel="Profile NameX Alignment Constraint"/>
                         <constraint firstItem="3TV-ZW-3Al" firstAttribute="top" secondItem="SLO-pc-Rut" secondAttribute="bottom" constant="8" id="kTE-5H-rCS"/>
                         <constraint firstItem="3TV-ZW-3Al" firstAttribute="leading" secondItem="dpr-QS-oNx" secondAttribute="leading" constant="8" id="rxT-Il-E5X"/>
+                        <constraint firstAttribute="trailing" secondItem="qHJ-yQ-d2n" secondAttribute="trailing" constant="8" id="tZ2-yX-bzK"/>
                         <constraint firstAttribute="trailing" secondItem="3TV-ZW-3Al" secondAttribute="trailing" constant="8" id="x0w-4J-10v"/>
                     </constraints>
                 </view>
                 <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9PX-CJ-34N">
-                    <rect key="frame" x="0.0" y="408" width="414" height="328"/>
+                    <rect key="frame" x="0.0" y="408" width="414" height="454"/>
                 </containerView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -103,6 +125,7 @@
         </view>
     </objects>
     <resources>
+        <image name="Arrow" width="126" height="126"/>
         <image name="tarantino" width="256" height="256"/>
     </resources>
 </document>

@@ -1,5 +1,10 @@
 import UIKit
 
+enum ImageReferenceSide {
+    case horizontal(width: CGFloat)
+    case vertical(height: CGFloat)
+}
+
 extension UIImage {
     func resized(to size: CGSize) -> UIImage {
         return UIGraphicsImageRenderer(size: size).image { _ in
@@ -40,5 +45,14 @@ extension UIImage {
     func resized(by ratio: CGFloat) -> UIImage {
         guard let cgImage = self.cgImage else { return self }
         return UIImage(cgImage: cgImage, scale: 1/ratio, orientation: self.imageOrientation)
+    }
+    
+    func resized(referenceSide: ImageReferenceSide) -> UIImage {
+        switch referenceSide {
+        case .horizontal(let width):
+            return resized(newWidth: width)
+        case .vertical(let height):
+            return resized(newHeight: height)
+        }
     }
 }
