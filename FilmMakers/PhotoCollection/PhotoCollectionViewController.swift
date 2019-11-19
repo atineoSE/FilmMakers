@@ -86,6 +86,7 @@ class PhotoCollectionViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let destination = segue.destination as? PhotoViewController, segue.identifier == PhotoCollectionViewController.ShowPhotoDetailsSegueIdentifier  else { return }
+        destination.transitioningDelegate = self
         destination.photo = selectedPhoto
     }
     
@@ -121,3 +122,22 @@ extension PhotoCollectionViewController: UICollectionViewDelegateFlowLayout  {
     }
 }
 
+extension PhotoCollectionViewController : UIViewControllerTransitioningDelegate {
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        guard
+            let focusItem = focusItem, let dataSource = dataSource,
+            let selectedCell = dataSource.collectionView(photoCollectionView, cellForItemAt: focusItem) as? SimplePhotoCollectionViewCell
+            else {
+                return nil
+        }
+        
+        // Convert frame for the selected photo cell into the appropriate coordinate space
+        var photoCellFrame = selectedCell.convert(selectedCell.frame, to: nil)
+        photoCellFrame.origin.y += delegate?.containerOffset() ?? 0.0
+        photoCellFrame.origin.y += -photoCollectionView.contentOffset.y
+        
+        return PhotoDetailsAnimator(photoCellFrame: photoCellFrame,
+                                    animationDuration: 0.6,
+                                    animationCompletion: nil)
+    }
+}

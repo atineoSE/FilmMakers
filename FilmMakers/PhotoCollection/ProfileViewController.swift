@@ -58,7 +58,7 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func didTapCollapseButton(_ sender: UIButton) {
-        animateTransition(towards: .collapsed, duration: animatorDuration)
+        animateOrReverseRunningTransition(towards: .collapsed, duration: animatorDuration)
     }
     
     override func viewDidLoad() {
@@ -102,9 +102,14 @@ class ProfileViewController: UIViewController {
             containerViewController = photoCollectionViewController
         }
         
+        func addPanGestureRecognizer() {
+            handlerSuperview.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(self.handlePanGesture(_:))))
+        }
+        
         // Initialize view controller
         initializeContainer()
         initializeConstraintReferenceData()
+        addPanGestureRecognizer()
         updateCollapseButton(state: .collapsed)
     }
     
@@ -112,6 +117,25 @@ class ProfileViewController: UIViewController {
         super.viewDidLayoutSubviews()
         guard let containerViewController = containerViewController, containerViewController.collapsedSize == nil else { return }
         containerViewController.collapsedSize = containerView.frame.size
+    }
+    
+    // MARK: IB methods
+    @IBAction func handlePanGesture(_ sender: UIPanGestureRecognizer) {
+        let translation = sender.translation(in: handlerSuperview)
+
+        switch sender.state {
+        case .began:
+            startInteractiveTransition(towards: self.nextState(), duration: animatorDuration)
+        case .changed:
+            if isPanningInTheActiveDirection(towards: self.nextState(), translation: translation) || isRunningAnimation {
+                registerPanningDirection(state: self.nextState(), velocity: sender.velocity(in: handlerSuperview))
+                updateInteractiveTransition(fractionComplete: self.fractionComplete(towards: self.nextState(), for: translation))
+            }
+        case .ended:
+            continueInteractiveTransition(fractionComplete: self.fractionComplete(towards: self.nextState(), for: translation), velocity: sender.velocity(in: handlerSuperview))
+        default:
+            break
+        }
     }
     
     // MARK: Animators
@@ -203,10 +227,50 @@ class ProfileViewController: UIViewController {
     }
     
     // MARK: Handle animations from tap gesture
-    private func animateTransition(towards state: State, duration: TimeInterval) {
-        addAnimatorsIfNeeded(towards: state, duration: duration)
-        runningAnimators.forEach({ $0.startAnimation() })
-        print("Starting animation with \(runningAnimators.count) animators")
+    private func animateOrReverseRunningTransition(towards state: State, duration: TimeInterval) {
+        if !isRunningAnimation {
+            addAnimatorsIfNeeded(towards: state, duration: duration)
+            runningAnimators.forEach({ $0.startAnimation() })
+            print("Starting animation with \(runningAnimators.count) animators")
+        } else {
+            print("Reversing animation")
+            reverseAnimation()
+        }
+    }
+    
+    // MARK: Handle animations from pan gesture
+    // Starts transition if necessary and pauses on pan .began
+    private func startInteractiveTransition(towards state: State, duration: TimeInterval) {
+        print("Start interactive transition")
+        self.addAnimatorsIfNeeded(towards: state, duration: duration)
+        runningAnimators.forEach({ $0.pauseAnimation() })
+        progressWhenInterrupted = runningAnimators.first?.fractionComplete ?? 0
+    }
+    
+    // Scrubs transition on pan .changed
+    private func updateInteractiveTransition(fractionComplete: CGFloat) {
+        runningAnimators.forEach({ $0.fractionComplete = fractionComplete })
+    }
+    
+    // Continues or reverse transition on pan .ended
+    private func continueInteractiveTransition(fractionComplete: CGFloat, velocity: CGPoint) {
+        let shouldCancel = fractionComplete < 0.2
+        if shouldCancel {
+            print("Reverse (cancel) animation after releasing pan gesture")
+            didReverseDirection = true
+            runningAnimators.forEach({
+                $0.isReversed = !$0.isReversed
+                $0.continueAnimation(withTimingParameters: nil, durationFactor: 0)
+            })
+        } else {
+            print("Continue animation after releasing pan gesture")
+            let fastestVelocity = abs(velocity.y) > abs(velocity.x) ? velocity.y : velocity.x
+            let timing = UICubicTimingParameters(fastestVelocity: fastestVelocity)
+            if didReverseDirection {
+                runningAnimators.forEach({ $0.isReversed = !$0.isReversed })
+            }
+            runningAnimators.forEach({ $0.continueAnimation(withTimingParameters: timing, durationFactor: 0) })
+        }
     }
     
     // MARK: Util
@@ -223,7 +287,10 @@ class ProfileViewController: UIViewController {
     }
     
     private func completeAnimations() {
-        toggleState()
+        if !didReverseDirection {
+            toggleState()
+        }
+        didReverseDirection = false
         clearAnimators()
         if didChangeViewBoundsDuringAnimation {
             UIView.animate(withDuration: 0.2){
@@ -231,6 +298,8 @@ class ProfileViewController: UIViewController {
                 self.didChangeViewBoundsDuringAnimation = false
             }
         }
+        
+        // Make sure we are in a consistent state in case of cancelled animation
         updateLayout(state: state)
         setContainerViewTopConstraint(state: state)
         setProfileConstraints(state: state)
@@ -254,9 +323,23 @@ class ProfileViewController: UIViewController {
         }
     }
     
+    private func registerPanningDirection(state: State, velocity: CGPoint) {
+        switch state {
+        case .expanded:
+            didReverseDirection = velocity.y > 0 ? true : false
+        case .collapsed:
+            didReverseDirection = velocity.y < 0 ? true : false
+        }
+    }
+    
     private func clearAnimators() {
         print("Remove animators")
         runningAnimators.removeAll()
+    }
+    
+    private func reverseAnimation() {
+        print("Reverse animation")
+        runningAnimators.forEach({ $0.isReversed = !$0.isReversed })
     }
     
     private func toggleState() {
@@ -290,13 +373,30 @@ class ProfileViewController: UIViewController {
             containerViewController?.photoCollectionLayout = .vertical
         }
     }
+
+    private func isPanningInTheActiveDirection(towards state: State, translation: CGPoint) -> Bool {
+        switch(state) {
+        case .expanded:
+            if translation.y > 0.0 {
+                return false
+            } else {
+                return true
+            }
+        case .collapsed:
+            if translation.y  > 0.0 {
+                return true
+            } else {
+                return false
+            }
+        }
+    }
 }
 
 extension ProfileViewController : PhotoCollectionViewControllerDelegate {
     func didTapOnPhoto() {
         print("didTapOnPhoto")
         if state == .collapsed {
-            animateTransition(towards: .expanded, duration: animatorDuration)
+            animateOrReverseRunningTransition(towards: nextState(), duration: animatorDuration)
         } else {
             containerViewController?.showPhotoDetails()
         }
