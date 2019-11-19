@@ -5,8 +5,16 @@ This is the companion code to the article **"Delight in iOS apps: crafting user 
 There are three main stages to this example, to be accessed through the designated tags:
 
 1. Basic prototype (tag "basic_prototype")
+
+   ![](/Volumes/MEDIA&DEV/dev/iOS/FilmMakers/FilmMakers/vids/01_basic_prototype.gif)
+
 2. Tap to expand (tag "animate_with_tap")
+
+   ![](/Volumes/MEDIA&DEV/dev/iOS/FilmMakers/FilmMakers/vids/02_tap_to_expand.gif)
+
 3. Pan/swipe to expand (tag "animate_with_pan")
+
+   ![](/Volumes/MEDIA&DEV/dev/iOS/FilmMakers/FilmMakers/vids/03_pan_to_expand.gif)
 
 These steps represent an progressive effort to add a more dynamic UI that responds to users intention to discover new content in a playful and responsive manner.
 
