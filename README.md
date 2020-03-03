@@ -1,6 +1,6 @@
 # FilmMakers: an app prototype to present delightful interactions in iOS apps
 
-This is the companion code to the article **"Delight in iOS apps: crafting user experiences that promote discovery"** (link pending).
+This is the companion code to the article [Delight in iOS apps: crafting user experiences that promote discovery"](https://www.expertlead.com/blog/delight-in-ios-apps-crafting-user-experiences-that-promote-discovery).
 
 There are three main stages to this example, to be accessed through the designated tags:
 
